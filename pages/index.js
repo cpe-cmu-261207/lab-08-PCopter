@@ -18,13 +18,29 @@ export default function Home() {
     //copy from old 2d Array
     const newPixels = CanvasLib.copyCanvas(pixels);
     //your code here
+    newPixels[yPos][xPos] = selColor;
+    setPixels(newPixels);
   };
 
   const clear = () => {
     //your code here
     //Hint : use CanvasLib.createEmptyCanvas()
+    const newPixels = CanvasLib.createEmptyCanvas();
+    setPixels(newPixels);
   };
 
+  /*const [ids, setIds] = useState([]);
+
+  const playDisco = () => {
+    const id = setInterval(
+      () => (setPixels(CanvasLib.createRandomCanvas()), 9000)
+    );
+    setIds(...ids, id);
+  };
+
+  const stopDisco = () => {
+    for (const id of ids) clearInterval(id);
+  };*/
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "GhostWhite" }}>
       <PainterContext.Provider value={{ selColor, setSelColor, pixels, paint }}>
@@ -36,7 +52,14 @@ export default function Home() {
           <button className="btn btn-dark" onClick={clear}>
             Clear
           </button>
-          <button className="btn btn-dark">Random Color</button>
+          <button
+            className="btn btn-dark"
+            onClick={() =>
+              setTimeout(setPixels(CanvasLib.createRandomCanvas()), 1000)
+            }
+          >
+            Random Color
+          </button>
         </div>
       </PainterContext.Provider>
     </div>
